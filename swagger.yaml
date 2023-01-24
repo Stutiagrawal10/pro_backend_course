@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: Social App
+  description: Our first Social App - Stuti
+  version: 1.0.1
+
+servers:
+  - url: http://localhost:4000/api/v1
+    description: local hosting version of our app
+  - url: https://loacalhost:4000/api/v1
+    description: this is a dummy api url, it doesn't work
+  
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+paths:
+  /instagram:
+    get:
+      summary: returns username, followers and follows
+      responses: 
+        '200': #status code
+          description: returns an object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  follows:
+                    type: string
+                  followers:
+                    type: string
+
+  /{token}:
+    get:
+      summary: returns whatever is there in parameters
+      parameters:
+        - name: token
+          default: 5
+          in: path
+          schema:
+            type: string
+      responses: 
+        '200': #status code
+          description: returns an object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  params:
+                    type: string
